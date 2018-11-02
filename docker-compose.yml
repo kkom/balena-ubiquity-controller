@@ -3,7 +3,7 @@ volumes:
     ubiquity-config:
 services:
   ubiquity-controller:
-    image: lsioarmhf/unifi
+    image: lsioarmhf/unifi:unstable
     ports:
       - "3478/udp"
       - "10001/udp"

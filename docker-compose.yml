@@ -1,0 +1,4 @@
+version: '2'
+services:
+  ubiquity-controller:
+    build: ./ubiquity-controller

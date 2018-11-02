@@ -1,3 +1,0 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-debian:latest
-
-CMD ["tail", "-f", "/dev/null"]

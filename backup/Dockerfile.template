@@ -9,7 +9,8 @@ RUN apt-get update && \
 COPY rclone.conf /var/rclone/
 RUN mkdir -p /var/gcp
 
-# Install backup script
+# Install scripts
 COPY unifi-backup /usr/bin/
+COPY run-container /usr/bin/
 
-CMD echo $SERVICE_ACCOUNT_FILE > /var/gcp/service_account_file.json && tail -f /dev/null
+CMD echo $SERVICE_ACCOUNT_FILE > /var/gcp/service_account_file.json && run-container

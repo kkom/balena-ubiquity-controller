@@ -1,8 +1,10 @@
 #!/bin/bash
 
-LOCAL_AUTOBACKUP_DIR="/config/data/backup/autobackup/"
-DEVICE_CLOUD_BACKUP_DIR="gcs:unifi.komorowski.me/$SITE_NAME/$RESIN_DEVICE_NAME_AT_INIT"
-DEFAULT_CLOUD_BACKUP_DIR="gcs:unifi.komorowski.me/$SITE_NAME/default"
+LOCAL_BACKUP_DIR="/config/data/backup/autobackup/"
+REMOTE_BACKUP_DIR="gcs:$GOOGLE_CLOUD_STORAGE_BUCKET/$GOOGLE_CLOUD_STORAGE_PREFIX/$SITE_NAME/"
+
+REMOTE_BACKUP_DIR_DEVICE="$REMOTE_BACKUP_DIR/$RESIN_DEVICE_NAME_AT_INIT"
+REMOTE_BACKUP_DIR_DEFAULT="$REMOTE_BACKUP_DIR/default"
 
 rclone_sync () {
    echo "Syncing $1 to $2..."
@@ -13,11 +15,11 @@ rclone_sync () {
 if [ "$(ls -A /config/data/backup/autobackup/)" ]; then
   # Sync autobackup with the device specific cloud backup (this ensures that
   # every device has it's last state available for inspection)
-  rclone_sync $LOCAL_AUTOBACKUP_DIR $DEVICE_CLOUD_BACKUP_DIR
+  rclone_sync $LOCAL_BACKUP_DIR $REMOTE_BACKUP_DIR_DEVICE
 
   # Sync the default cloud backup as well (this is used for auto restores)
-  rclone_sync $DEVICE_CLOUD_BACKUP_DIR $DEFAULT_CLOUD_BACKUP_DIR
+  rclone_sync $REMOTE_BACKUP_DIR_DEVICE $REMOTE_BACKUP_DIR_DEFAULT
 else
   # Restore from default backup
-  rclone_sync $DEFAULT_CLOUD_BACKUP_DIR $LOCAL_AUTOBACKUP_DIR
+  rclone_sync $REMOTE_BACKUP_DIR_DEFAULT $LOCAL_BACKUP_DIR
 fi

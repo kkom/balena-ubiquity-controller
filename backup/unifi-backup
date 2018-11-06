@@ -1,0 +1,22 @@
+#!/bin/bash
+
+LOCAL_AUTOBACKUP_DIR="/config/data/backup/autobackup/"
+DEVICE_CLOUD_BACKUP_DIR="gcs:unifi.komorowski.me/$SITE_NAME/$(hostname)"
+DEFAULT_CLOUD_BACKUP_DIR="gcs:unifi.komorowski.me/$SITE_NAME/default"
+
+rclone_sync () {
+   echo "Syncing $1 to $2..."
+   rclone --config /var/rclone/rclone.conf sync $1 $2
+}
+
+if [ "$(ls -A /config/data/backup/autobackup/)" ]; then
+  # Sync autobackup with the device specific cloud backup (this ensures that
+  # every device has it's last state available for inspection)
+  rclone_sync $LOCAL_AUTOBACKUP_DIR $DEVICE_CLOUD_BACKUP_DIR
+
+  # Sync the default cloud backup as well (this is used for auto restores)
+  rclone_sync $DEVICE_CLOUD_BACKUP_DIR $DEFAULT_CLOUD_BACKUP_DIR
+else
+  # Restore from default backup
+  rclone_sync $DEFAULT_CLOUD_BACKUP_DIR $LOCAL_AUTOBACKUP_DIR
+fi

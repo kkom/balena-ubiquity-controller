@@ -10,6 +10,6 @@ COPY rclone.conf /var/rclone/
 RUN mkdir -p /var/gcp
 
 # Install backup script
-COPY unifi_backup.sh /usr/bin/
+COPY unifi-backup /usr/bin/
 
-CMD echo $SERVICE_ACCOUNT_FILE | tee /var/gcp/service_account_file.json && tail -f /dev/null
+CMD echo $SERVICE_ACCOUNT_FILE > /var/gcp/service_account_file.json && tail -f /dev/null

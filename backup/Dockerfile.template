@@ -4,4 +4,7 @@ RUN apt-get update && \
     apt-get -y install curl zip man-db && \
     curl https://rclone.org/install.sh | bash
 
-CMD tail -f /dev/null
+COPY rclone.conf /var/rclone/
+RUN mkdir -p /var/gcp
+
+CMD echo $SERVICE_ACCOUNT_FILE | tee /var/gcp/service_account_file.json && tail -f /dev/null

@@ -7,6 +7,7 @@ DEFAULT_CLOUD_BACKUP_DIR="gcs:unifi.komorowski.me/$SITE_NAME/default"
 rclone_sync () {
    echo "Syncing $1 to $2..."
    rclone --config /var/rclone/rclone.conf sync $1 $2
+   echo "Done"
 }
 
 if [ "$(ls -A /config/data/backup/autobackup/)" ]; then

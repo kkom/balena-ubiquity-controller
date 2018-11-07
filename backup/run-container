@@ -1,7 +1,0 @@
-#!/bin/bash
-
-while true
-do
-	unifi-backup
-	sleep 3600
-done

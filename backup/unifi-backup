@@ -12,14 +12,27 @@ rclone_sync () {
    echo "Done"
 }
 
-if [ "$(ls -A $LOCAL_BACKUP_DIR)" ]; then
-  # Sync autobackup with the device specific cloud backup (this ensures that
-  # every device has it's last state available for inspection)
-  rclone_sync $LOCAL_BACKUP_DIR $REMOTE_BACKUP_DIR_DEVICE
+while true
+do
+  if [ "$(ls -A $LOCAL_BACKUP_DIR)" ]; then
+    # Skip backup if files have not changed
+    if [ $BACKUP_HASH == "$(ls -A /config/data/backup/autobackup | shasum)" ]; then
+      continue
+    fi
 
-  # Sync the default cloud backup as well (this is used for auto restores)
-  rclone_sync $REMOTE_BACKUP_DIR_DEVICE $REMOTE_BACKUP_DIR_DEFAULT
-else
-  # Restore from default backup
-  rclone_sync $REMOTE_BACKUP_DIR_DEFAULT $LOCAL_BACKUP_DIR
-fi
+    # Sync autobackup with the device specific cloud backup (this ensures that
+    # every device has its last state available for inspection)
+    rclone_sync $LOCAL_BACKUP_DIR $REMOTE_BACKUP_DIR_DEVICE
+
+    # Sync the default cloud backup as well (this is used for auto restores)
+    rclone_sync $REMOTE_BACKUP_DIR_DEVICE $REMOTE_BACKUP_DIR_DEFAULT
+
+    # Save the state
+    BACKUP_HASH=$(ls -A /config/data/backup/autobackup | shasum)
+  else
+    # Restore from default backup
+    rclone_sync $REMOTE_BACKUP_DIR_DEFAULT $LOCAL_BACKUP_DIR
+  fi
+
+  sleep 300
+done

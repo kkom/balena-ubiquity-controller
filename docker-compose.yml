@@ -1,6 +1,6 @@
 version: '2'
 volumes:
-    ubiquity-config:
+  ubiquity-config:
 services:
   backup:
     build: ./backup

@@ -2,8 +2,8 @@ FROM resin/%%RESIN_MACHINE_NAME%%-ubuntu:latest
 
 # Install rclone
 RUN apt-get update && \
-    apt-get -y install curl zip man-db && \
-    curl https://rclone.org/install.sh | bash
+  apt-get -y install curl zip man-db && \
+  curl https://rclone.org/install.sh | bash
 
 # Configure rclone
 COPY rclone.conf /var/rclone/

@@ -7,9 +7,9 @@ REMOTE_BACKUP_DIR_DEVICE="$REMOTE_BACKUP_DIR/$RESIN_DEVICE_NAME_AT_INIT"
 REMOTE_BACKUP_DIR_DEFAULT="$REMOTE_BACKUP_DIR/default"
 
 rclone_sync () {
-   echo "Syncing $1 to $2..."
-   rclone --config /var/rclone/rclone.conf sync $1 $2
-   echo "Done"
+  echo "Syncing $1 to $2..."
+  rclone --config /var/rclone/rclone.conf sync $1 $2
+  echo "Done"
 }
 
 while true

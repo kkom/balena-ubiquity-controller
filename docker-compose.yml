@@ -2,13 +2,13 @@ version: '2'
 volumes:
   ubiquity-config:
 services:
-  # backup:
-  #   build: ./backup
-  #   volumes:
-  #     - "ubiquity-config:/config"
+  backup:
+    build: ./backup
+    volumes:
+      - "ubiquity-config:/config"
   ubiquity-controller:
-    # depends_on:
-    #   - backup
+    depends_on:
+      - backup
     image: lsioarmhf/unifi:latest
     ports:
       - "3478/udp"
@@ -19,5 +19,8 @@ services:
       - "8843"
       - "8880"
       - "6789"
+    # There are some issues with this image now. Let's not kill the SD card
+    # with continuous restarts until we figure it out.
+    restart: no
     volumes:
       - "ubiquity-config:/config"

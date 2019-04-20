@@ -4,6 +4,7 @@ volumes:
 services:
   backup:
     build: ./backup
+    restart: unless-stopped
     volumes:
       - "ubiquity-config:/config"
   ubiquity-controller:
@@ -19,8 +20,6 @@ services:
       - "8843:8843"
       - "8880:8880"
       - "10001:10001/udp"
-    # There are some issues with this image now. Let's not kill the SD card
-    # with continuous restarts until we figure it out.
-    restart: no
+    restart: unless-stopped
     volumes:
       - "ubiquity-config:/config"

@@ -15,9 +15,12 @@ rclone_sync () {
   echo "Done"
 }
 
+# Create the local backup directory, if it doesn't exist yet
+mkdir -p $LOCAL_BACKUP_DIR
+
 while true
 do
-  if [[ ls -A $LOCAL_BACKUP_DIR ]]; then
+  if [[ "$(ls -A $LOCAL_BACKUP_DIR)" ]]; then
     # Skip backup if files have not changed
     if [[ ${BACKUP_HASH:-} == "$(ls -A /config/data/backup/autobackup | shasum)" ]]; then
       continue

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# strict mode
+set -euo pipefail
+
 LOCAL_BACKUP_DIR="/config/data/backup/autobackup"
 REMOTE_BACKUP_DIR="gcs:$GOOGLE_CLOUD_STORAGE_BUCKET/$SITE_NAME"
 
@@ -14,9 +17,9 @@ rclone_sync () {
 
 while true
 do
-  if [ "$(ls -A $LOCAL_BACKUP_DIR)" ]; then
+  if [[ ls -A $LOCAL_BACKUP_DIR ]]; then
     # Skip backup if files have not changed
-    if [ $BACKUP_HASH == "$(ls -A /config/data/backup/autobackup | shasum)" ]; then
+    if [[ ${BACKUP_HASH:-} == "$(ls -A /config/data/backup/autobackup | shasum)" ]]; then
       continue
     fi
 

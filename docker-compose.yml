@@ -9,7 +9,7 @@ services:
   ubiquity-controller:
     depends_on:
       - backup
-    image: linuxserver/unifi-controller:arm32v7-LTS
+    image: linuxserver/unifi-controller:arm32v7-latest
     ports:
       - "3478:3478/udp"
       - "6789:6789"

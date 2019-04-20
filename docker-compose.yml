@@ -9,7 +9,7 @@ services:
   ubiquity-controller:
     depends_on:
       - backup
-    image: lsioarmhf/unifi:unstable
+    image: linuxserver/unifi-controller:arm64v8-LTS
     ports:
       - "3478:3478/udp"
       - "6789:6789"

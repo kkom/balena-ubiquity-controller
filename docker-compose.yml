@@ -1,13 +1,13 @@
 version: '2'
 volumes:
-  ubiquity-config:
+  unifi-config:
 services:
   backup:
     build: ./backup
     restart: unless-stopped
     volumes:
-      - "ubiquity-config:/config"
-  ubiquity-controller:
+      - "unifi-config:/config"
+  unifi-controller:
     depends_on:
       - backup
     image: linuxserver/unifi-controller:arm32v7-5.11.46-ls35
@@ -22,4 +22,4 @@ services:
       - "10001:10001/udp"
     restart: unless-stopped
     volumes:
-      - "ubiquity-config:/config"
+      - "unifi-config:/config"

@@ -22,7 +22,7 @@ while true
 do
   if [[ "$(ls -A $LOCAL_BACKUP_DIR)" ]]; then
     # Skip backup if files have not changed
-    if [[ ${BACKUP_HASH:-} == "$(ls -A /config/data/backup/autobackup | shasum)" ]]; then
+    if [[ ${BACKUP_HASH:-} == "$(ls -A $LOCAL_BACKUP_DIR | shasum)" ]]; then
       continue
     fi
 
@@ -34,7 +34,7 @@ do
     rclone_sync $REMOTE_BACKUP_DIR_DEVICE $REMOTE_BACKUP_DIR_DEFAULT
 
     # Save the state
-    BACKUP_HASH=$(ls -A /config/data/backup/autobackup | shasum)
+    BACKUP_HASH=$(ls -A $LOCAL_BACKUP_DIR | shasum)
   else
     # Restore from default backup
     rclone_sync $REMOTE_BACKUP_DIR_DEFAULT $LOCAL_BACKUP_DIR

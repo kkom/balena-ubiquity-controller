@@ -16,16 +16,15 @@ services:
       - PGID=1000
     # Ports are documented in https://help.ubnt.com/hc/en-us/articles/218506997
     ports:
-      - "3478:3478/udp"
-      - "6789:6789"
-      - "8080:8080"
-      - "8081:8081"
-      - "8443:8443"
-      - "8843:8843"
-      - "8880:8880"
+      - "3478:3478/udp" # Port used for STUN.
+      - "6789:6789" # Port used for UniFi mobile speed test.
+      - "8080:8080" # Port used for device and controller communication.
+      - "8443:8443" # Port used for HTTPS portal redirection.
+      - "8843:8843" # Port used for HTTPS portal redirection.
+      - "8880:8880" # Port used for HTTP portal redirection.
       - "27117:27117" # Port used for local-bound database communication.
       - "5656-5699:5656-5699/udp" # Ports used by AP-EDU broadcasting.
-      - "10001:10001/udp"
+      - "10001:10001/udp" # Port used for device discovery
       - "1900:1900/udp" # Port used for "Make controller discoverable on L2 network" in controller settings.
     restart: unless-stopped
     volumes:

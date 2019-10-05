@@ -10,7 +10,7 @@ services:
   unifi-controller:
     depends_on:
       - backup
-    image: linuxserver/unifi-controller:arm32v7-5.11.46-ls35
+    image: linuxserver/unifi-controller:arm64v8-5.11.46-ls36
     environment:
       - PUID=1000
       - PGID=1000

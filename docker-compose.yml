@@ -17,11 +17,11 @@ services:
     # Ports are documented in https://help.ubnt.com/hc/en-us/articles/218506997
     ports:
       - "3478:3478/udp" # Port used for STUN.
-      - "6789:6789" # Port used for UniFi mobile speed test.
       - "8080:8080" # Port used for device and controller communication.
       - "8443:8443" # Port used for controller GUI/API as seen in a web browser.
-      - "8843:8843" # Port used for HTTPS portal redirection.
       - "8880:8880" # Port used for HTTP portal redirection.
+      - "8843:8843" # Port used for HTTPS portal redirection.
+      - "6789:6789" # Port used for UniFi mobile speed test.
       - "27117:27117" # Port used for local-bound database communication.
       - "5656-5699:5656-5699/udp" # Ports used by AP-EDU broadcasting.
       - "10001:10001/udp" # Port used for device discovery

@@ -1,10 +1,9 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-ubuntu:bionic
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster
 
 # Install rclone
-RUN apt-get update && \
-  apt-get -y install curl man-db zip && \
-  curl https://rclone.org/install.sh | bash && \
-  rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+  && apt-get install --assume-yes --no-install-recommends rclone \
+  && rm -rf /var/lib/apt/lists/*
 
 # Configure rclone
 COPY rclone.conf /var/rclone/

@@ -23,7 +23,8 @@ services:
       - "8843:8843" # Port used for HTTPS portal redirection.
       - "6789:6789" # Port used for UniFi mobile speed test.
       - "27117:27117" # Port used for local-bound database communication.
-      - "5656-5699:5656-5699/udp" # Ports used by AP-EDU broadcasting.
+      # See https://forums.balena.io/t/large-number-of-forwarded-udp-ports-break-the-device/36364
+      # - "5656-5699:5656-5699/udp" # Ports used by AP-EDU broadcasting.
       - "10001:10001/udp" # Port used for device discovery
       - "1900:1900/udp" # Port used for "Make controller discoverable on L2 network" in controller settings.
     restart: unless-stopped

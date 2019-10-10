@@ -11,9 +11,6 @@ services:
     depends_on:
       - backup
     image: linuxserver/unifi-controller:arm64v8-5.11.46-ls36
-    environment:
-      - PUID=1000
-      - PGID=1000
     # Ports are documented in https://help.ubnt.com/hc/en-us/articles/218506997
     ports:
       - "3478:3478/udp" # Port used for STUN.

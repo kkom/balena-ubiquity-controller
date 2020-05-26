@@ -7,7 +7,6 @@ RUN apt-get update \
     #
     # Install packages
     && apt-get -y install --no-install-recommends \
-        # Needed to communicate with https endpoints
         rclone \
     #
     # Clean up

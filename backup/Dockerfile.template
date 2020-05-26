@@ -1,9 +1,18 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:buster
 
-# Install rclone
+
+# Configure apt
 RUN apt-get update \
-  && apt-get install --assume-yes --no-install-recommends rclone \
-  && rm -rf /var/lib/apt/lists/*
+    && apt-get -y install --no-install-recommends apt-utils \
+    #
+    # Install packages
+    && apt-get -y install --no-install-recommends \
+        # Needed to communicate with https endpoints
+        rclone \
+    #
+    # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y
 
 # Configure rclone
 COPY rclone.conf /var/rclone/

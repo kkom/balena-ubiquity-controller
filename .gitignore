@@ -1,0 +1,8 @@
+# Logs
+*.log
+
+# MacOS system files
+.DS_Store
+
+# No global VS Code settings, VS Code should be opened in subdirs
+/.vscode/

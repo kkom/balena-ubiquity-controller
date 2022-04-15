@@ -1,5 +1,12 @@
 {
+    "[makefile]": {
+        "editor.insertSpaces": false,
+    },
+    "editor.formatOnSave": true,
     "files.associations": {
         "Dockerfile.template": "dockerfile",
     },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
 }

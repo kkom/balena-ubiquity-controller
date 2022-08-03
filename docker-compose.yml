@@ -10,7 +10,7 @@ services:
   unifi-controller:
     depends_on:
       - backup
-    image: linuxserver/unifi-controller:7.0.25-ls147
+    image: linuxserver/unifi-controller:7.1.68-ls158
     # There are multiple reasons why we use host networking:
     #
     # 1. To avoid having to keep a large number of ports in sync. https://help.ubnt.com/hc/en-us/articles/218506997

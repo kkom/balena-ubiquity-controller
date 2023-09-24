@@ -7,7 +7,7 @@ RUN apt-get update \
     #
     # Install packages
     && apt-get -y install --no-install-recommends \
-        rclone \
+    rclone \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -20,5 +20,5 @@ COPY rclone.conf /var/rclone/
 COPY unifi-backup.bash /usr/bin/
 
 CMD mkdir -p /var/gcp && \
-  echo $SERVICE_ACCOUNT_FILE > /var/gcp/service_account_file.json && \
-  unifi-backup.bash
+    echo $SERVICE_ACCOUNT_FILE > /var/gcp/service_account_file.json && \
+    unifi-backup.bash

@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:bullseye
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:bookworm
 
 
 # Configure apt
